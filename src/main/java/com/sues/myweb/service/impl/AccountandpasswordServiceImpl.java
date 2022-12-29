@@ -26,8 +26,10 @@ import javax.management.Query;
 @Service("accountandpasswordService")
 public class AccountandpasswordServiceImpl extends ServiceImpl<AccountandpasswordDao, Accountandpassword> implements AccountandpasswordService {
     private static final Logger logger = LoggerFactory.getLogger(AccountandpasswordService.class);
-
-    //登录验证系统
+    /**
+     * 验证登录部分
+     *
+     * */
     @Override
     public Result loginVerify(String jsonString) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -40,11 +42,9 @@ public class AccountandpasswordServiceImpl extends ServiceImpl<Accountandpasswor
         //select password from accountandpassword where account == account
         Accountandpassword accountandpassword = query().eq("account", account).one();
         if(accountandpassword == null){
-            System.out.println("账号不存在");
             return Result.fail("账号不存在");
         }
         if(!accountandpassword.getPassword().equals(password)){
-            System.out.println("密码错误");
             return Result.fail("密码错误");
         }
         //快速打印日志

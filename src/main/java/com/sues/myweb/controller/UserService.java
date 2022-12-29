@@ -30,10 +30,16 @@ public class UserService{
     @Resource
     private AccountandpasswordService accountandpasswordService;
 
+    /**
+     * 验证登录部分
+     * */
     //验证登录部分
     @PostMapping("/login")
     public Result login(@RequestBody String jsonString) throws JsonProcessingException {
         return accountandpasswordService.loginVerify(jsonString);
     }
+
+
+
 }
 
