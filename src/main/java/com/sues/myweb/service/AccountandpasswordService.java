@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sues.myweb.entity.Accountandpassword;
 import com.sues.myweb.utils.Result;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * (Accountandpassword)表服务接口
  *
@@ -12,6 +14,8 @@ import com.sues.myweb.utils.Result;
  * @since 2022-12-26 15:30:19
  */
 public interface AccountandpasswordService extends IService<Accountandpassword> {
-    Result loginVerify(String jsonString) throws JsonProcessingException;
+    Result loginVerify(String jsonString,HttpServletResponse response) throws JsonProcessingException;
+
+    Result registerAccount(String jsonString) throws JsonProcessingException;
 }
 

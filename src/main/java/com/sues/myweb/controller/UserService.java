@@ -11,6 +11,7 @@ import com.sues.myweb.utils.*;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Enumeration;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
  * @author Alan
  * @since 2022-12-26 15:30:14
  */
+
 @RestController
 @RequestMapping("/userService")
 public class UserService{
@@ -35,11 +37,17 @@ public class UserService{
      * */
     //验证登录部分
     @PostMapping("/login")
-    public Result login(@RequestBody String jsonString) throws JsonProcessingException {
-        return accountandpasswordService.loginVerify(jsonString);
+    public Result login(@RequestBody String jsonString,HttpServletResponse response) throws JsonProcessingException {
+        return accountandpasswordService.loginVerify(jsonString,response);
     }
 
 
-
+    /**
+     * 账号注册部分
+     * */
+    @PostMapping("/register")
+    public Result register(@RequestBody String jsonString) throws JsonProcessingException {
+        return accountandpasswordService.registerAccount(jsonString);
+    }
 }
 

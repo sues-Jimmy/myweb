@@ -1,7 +1,13 @@
 package com.sues.myweb.configuation;
 
+import com.sues.myweb.utils.RefreshTokenInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -14,6 +20,8 @@ public class WebConfig implements WebMvcConfigurer {
     //用于配置跨域请求的映射规则
     //这里是因为同源策略----浏览器只允许同源网站之间的脚本交互(即协议、端口、域名相同)，而不允许跨域网站之间的脚本交互从而避免恶意网站利用跨域
     //脚本攻击用户的隐私信息----也可以使用nginx来避免
+    // 当前跨域请求最大有效时长。这里默认1天
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //表示对所有路径都进行跨域请求配置
@@ -25,5 +33,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 //表示预检请求的有效事件为3600s
                 .maxAge(3600);
+
+    }
+    //自定义拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new RefreshTokenInterceptor()).addPathPatterns("/**").order(0);;
     }
 }

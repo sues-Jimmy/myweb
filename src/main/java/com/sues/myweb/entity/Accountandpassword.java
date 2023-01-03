@@ -15,21 +15,13 @@ import java.io.Serializable;
  */
 @Data
 public class Accountandpassword extends Model<Accountandpassword> {
-    
-    private Integer id;
+
 
     private String account;
     
     private String password;
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getAccount() {
         return account;
@@ -47,14 +39,5 @@ public class Accountandpassword extends Model<Accountandpassword> {
         this.password = password;
     }
 
-    /**
-     * 获取主键值
-     *
-     * @return 主键值
-     */
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
     }
 
